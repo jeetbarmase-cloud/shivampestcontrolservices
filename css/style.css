@@ -1,4 +1,8 @@
 
+html, body {
+    overflow-x: hidden;
+}
+
 /*** Spinner Start ***/
 #spinner {
     opacity: 0;
@@ -79,18 +83,22 @@
 @media (max-width: 768px) {
     .topbar {
         flex-direction: column;
+        text-align: center;
     }
     .search-btn {
         display: none;
     }
     .topbar-info {
         flex-direction: column;
+        align-items: center !important;
     }
     .topbar-info a {
         padding: 0 0 10px 0;
+        margin-right: 0 !important;
     }
     .topbar-icon {
-        padding: 0 0 10px 0;
+        padding: 10px 0;
+        justify-content: center !important;
     }
 }
 
@@ -165,6 +173,12 @@
 
 /*** Navbar End ***/
 
+@media (max-width: 576px) {
+    .navbar-brand h1 {
+        font-size: 1.5rem !important;
+    }
+}
+
 
 
 /*** Carousel Start ***/
@@ -233,18 +247,33 @@
 @media (max-width: 768px) {
     .carousel-item {
         width: 100%;
-        height: 400px;
+        height: auto;
+        min-height: 400px;
     }
 
     .carousel-item img {
-        height: 400px;
+        height: auto;
+        min-height: 400px;
+        object-fit: cover;
+    }
+
+    .carousel-caption {
+        text-align: center;
+    }
+
+    .carousel-caption h1, 
+    .carousel-caption .display-1 {
+        font-size: 2.5rem !important;
+    }
+
+    .carousel-caption h4 {
+        font-size: 1.2rem;
     }
 
     .carousel-control-prev,
     .carousel-control-next {
         display: none;
     }
-    
 }
 
 .page-header {
@@ -299,6 +328,23 @@
     left: -10%;
     rotate: 25deg;
     z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .rotate-left, .rotate-right {
+        display: none;
+    }
+    .about-img {
+        padding: 10px;
+    }
+    .experiences {
+        width: 120px;
+        height: 150px;
+        padding: 20px;
+    }
+    .experiences h1 {
+        font-size: 2rem;
+    }
 }
 
 .rotate-right {
@@ -436,6 +482,12 @@
     z-index: 2;
 }
 
+@media (max-width: 768px) {
+    .project-left, .project-right {
+        display: none;
+    }
+}
+
 .project-right {
     width: 180px;
     height: 70px;
@@ -555,7 +607,12 @@
 
 .pricing-item:hover {
     box-shadow: 0 0 30px rgba(0, 0, 0, .5);
-    margin: -20px 0 20px 0;
+}
+
+@media (min-width: 992px) {
+    .pricing-item:hover {
+        margin: -20px 0 20px 0;
+    }
 }
 
 .pricing-label {
@@ -658,6 +715,16 @@
     padding-right: 60px;
 }
 
+@media (max-width: 576px) {
+    .testimonial-carousel {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .testimonial-carousel .owl-nav {
+        display: none;
+    }
+}
+
 .testimonial-carousel .owl-nav .owl-prev,
 .testimonial-carousel .owl-nav .owl-next {
     display: flex;
@@ -739,7 +806,13 @@
     background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url(../img/carousel-2.jpg) center center no-repeat;
     background-size: cover;
     color: rgba(255, 255, 255, .7);
-    margin-top: 6rem;
+    margin-top: 3rem;
+}
+
+@media (min-width: 992px) {
+    .footer {
+        margin-top: 6rem;
+    }
 }
 
 .footer-item,
