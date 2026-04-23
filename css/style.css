@@ -866,6 +866,7 @@ html, body {
     letter-spacing: 0.5px;
     border: 1px solid var(--bs-dark);
     margin-right: 15px;
+    white-space: nowrap;
     transition: 0.3s;
 }
 
@@ -879,6 +880,13 @@ html, body {
     .iso-badge {
         margin-right: 0;
         margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    .iso-badge {
+        font-size: 11px;
+        padding: 2px 6px;
     }
 }
 
