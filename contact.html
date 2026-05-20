@@ -329,7 +329,6 @@
         <!-- Template Javascript -->
         <!-- <script src="js/main.js"></script> -->
          <script src="js/main.js"></script>
-         <script src="https://smtpjs.com/v3/smtp.js"></script>
          <script>
              function sendContactEmail() {
                  var name = document.getElementById("contact-name").value;
@@ -354,27 +353,32 @@
                      ${message}
                  `;
 
-                 Email.send({
-                     Host : "smtp.gmail.com",
-                     Username : "shivampestcontrolservices@gmail.com",
-                     Password : "kpxqbnkuxdlozugs",
-                     To : 'shivampestcontrolservices@gmail.com',
-                     From : "shivampestcontrolservices@gmail.com",
-                     Subject : "New Contact Form Submission: " + subject,
-                     Body : ebody
-                 }).then(
-                   function(response) {
-                       if(response === "OK") {
-                           alert("Your message has been sent successfully!");
-                           document.getElementById("contact-name").value = "";
-                           document.getElementById("contact-email").value = "";
-                           document.getElementById("contact-subject").value = "";
-                           document.getElementById("contact-message").value = "";
-                       } else {
-                           alert("Error sending message: " + response);
-                       }
-                   }
-                 );
+                 fetch('/api/send_email', {
+                     method: 'POST',
+                     headers: {
+                         'Content-Type': 'application/json',
+                     },
+                     body: JSON.stringify({
+                         subject: "New Contact Form Submission: " + subject,
+                         body: ebody
+                     })
+                 })
+                 .then(response => response.json())
+                 .then(data => {
+                     if (data.status === "success") {
+                         alert("Your message has been sent successfully!");
+                         document.getElementById("contact-name").value = "";
+                         document.getElementById("contact-email").value = "";
+                         document.getElementById("contact-subject").value = "";
+                         document.getElementById("contact-message").value = "";
+                     } else {
+                         alert("Error sending message: " + data.message);
+                     }
+                 })
+                 .catch(error => {
+                     console.error('Error:', error);
+                     alert("Error sending message. Please try again later.");
+                 });
              }
          </script>
     </body>

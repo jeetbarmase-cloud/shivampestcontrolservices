@@ -972,7 +972,6 @@
 
     <!-- Template Javascript -->
     <script src="./js/main.js"></script>
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script>
         function sendServiceEmail() {
             var serviceType = document.getElementById("service-type").value;
@@ -995,27 +994,32 @@
                 <b>Email:</b> ${email}
             `;
 
-            Email.send({
-                Host : "smtp.gmail.com",
-                Username : "shivampestcontrolservices@gmail.com",
-                Password : "kpxqbnkuxdlozugs",
-                To : 'shivampestcontrolservices@gmail.com',
-                From : "shivampestcontrolservices@gmail.com",
-                Subject : "New Service Request: " + serviceType,
-                Body : ebody
-            }).then(
-              function(response) {
-                  if(response === "OK") {
-                      alert("Your request has been submitted successfully!");
-                      document.getElementById("service-type").value = "Type Of Service";
-                      document.getElementById("service-name").value = "";
-                      document.getElementById("service-phone").value = "";
-                      document.getElementById("service-email").value = "";
-                  } else {
-                      alert("Error sending message: " + response);
-                  }
-              }
-            );
+            fetch('/api/send_email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    subject: "New Service Request: " + serviceType,
+                    body: ebody
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert("Your request has been submitted successfully!");
+                    document.getElementById("service-type").value = "Type Of Service";
+                    document.getElementById("service-name").value = "";
+                    document.getElementById("service-phone").value = "";
+                    document.getElementById("service-email").value = "";
+                } else {
+                    alert("Error sending message: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Error sending request. Please try again later.");
+            });
         }
     </script>
 </body>
