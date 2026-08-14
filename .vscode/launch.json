@@ -5,24 +5,30 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Attach to Chrome",
-            "port": 9222,
-            "request": "attach",
-            "type": "chrome",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
-            "name": "Attach to Chrome",
-            "port": 9222,
-            "request": "attach",
-            "type": "chrome",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
+            "name": "Launch index.html in Chrome",
             "type": "chrome",
             "request": "launch",
-            "name": "Open index.html",
-            "file": "d:\\project\\index.html"
+            "file": "${workspaceFolder}/index.html"
+        },
+        {
+            "name": "Launch Current HTML File in Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "file": "${file}"
+        },
+        {
+            "name": "Launch Chrome (Flask Server: localhost:5000)",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5000",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: Run app.py (Flask)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/app.py",
+            "console": "integratedTerminal"
         }
     ]
 }
